@@ -1,11 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Pokemon = (props) => {
-  const { name, image, types } = props;
+  const { name, image, types, id } = props;
   return (
     <div>
       <div className="border-2 border-gray-300 rounded-xl p-4 text-lg w-60 shadow-md hover:shadow-lg transition  flex justify-center items-center ">
-        <img src={image} alt={name} className="w-28 h-30  " />
+        
+        <Link to = {`/pokemon/${id}`}><img src={image} alt={name} className="w-28 h-30  " />
+        </Link>
       </div>
       <div className="flex  items-center justify-center">
         <p className=" font-semibold mr-2 inline-block mt-1  text-sm bg-green-400 rounded-full px-2 items-center shadow-md shadow-emerald-700 ">

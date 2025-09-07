@@ -33,17 +33,18 @@ const PokemonList = () => {
     }));
     // console.log(pokemonDataResult);
     setPokemonList(pokemonDataResult);
+    setLoading(false);
   };
 
   useEffect(() => {
     fetchPokemon();
-    // setPokemon(pokemoonData)
-    setLoading(false);
+    
+    
   }, [pokeUrl]);
 
   return (
     <div className="max-w-full w-full flex flex-col items-center justify-center mt-10">
-      <h1 className="text-2xl font-bold">Pokemon will be listed here</h1>
+      <h1 className="text-2xl font-bold">Pokemon List </h1>
       <div className="max-w-full w-full flex flex-wrap items-center justify-center mt-10 gap-6">
         {loading ? (
           <p className="text-xl font-semibold mt-6">Loading...</p>
@@ -54,6 +55,7 @@ const PokemonList = () => {
               name={poke.name}
               image={poke.image}
               types={poke.types}
+              id={poke.id}
             />
           ))
         )}
@@ -61,7 +63,7 @@ const PokemonList = () => {
       <div className="flex items-center justify-center gap-2 mt-4 mb-4">
         {prevList && (
           <button
-            className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 shadow-md shadow-blue-700"
+            className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 shadow-md shadow-blue-700 cursor-pointer"
             onClick={() => setPokeUrl(prevList)}
           >
             Previous
@@ -69,7 +71,7 @@ const PokemonList = () => {
         )}
         {nextList && (
           <button
-            className="bg-blue-500 text-white px-2 py-1  rounded hover:bg-blue-600 shadow-md shadow-blue-700"
+            className="bg-blue-500 text-white px-2 py-1  rounded hover:bg-blue-600 shadow-md shadow-blue-700 cursor-pointer"
             onClick={() => setPokeUrl(nextList)}
           >
             Next
