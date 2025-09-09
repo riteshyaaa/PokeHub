@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Pokemon from "../pokemon/pokemon";
+import Pokemon from "../pokemon/Pokemon";
 import usePokemonList from "../../hooks/usePokemonList";
 
 const POKEMON_API_URL = "https://pokeapi.co/api/v2/pokemon";
