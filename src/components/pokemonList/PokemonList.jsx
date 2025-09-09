@@ -6,7 +6,8 @@ import usePokemonList from "../../hooks/usePokemonList";
 const POKEMON_API_URL = "https://pokeapi.co/api/v2/pokemon";
 
 const PokemonList = () => {
-const [pokemonListState, setPokemonListState] = usePokemonList(POKEMON_API_URL);
+  const [pokemonListState, setPokemonListState] =
+    usePokemonList(POKEMON_API_URL);
 
   return (
     <div className="max-w-full w-full flex flex-col items-center justify-center mt-10">
@@ -30,7 +31,12 @@ const [pokemonListState, setPokemonListState] = usePokemonList(POKEMON_API_URL);
         {pokemonListState.prevList && (
           <button
             className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 shadow-md shadow-blue-700 cursor-pointer"
-            onClick={() => setPokemonListState( prevState => ({...prevState, pokeUrl: pokemonListState.prevList}))}
+            onClick={() =>
+              setPokemonListState((prevState) => ({
+                ...prevState,
+                pokeUrl: pokemonListState.prevList,
+              }))
+            }
           >
             Previous
           </button>
@@ -38,12 +44,17 @@ const [pokemonListState, setPokemonListState] = usePokemonList(POKEMON_API_URL);
         {pokemonListState.nextList && (
           <button
             className="bg-blue-500 text-white px-2 py-1  rounded hover:bg-blue-600 shadow-md shadow-blue-700 cursor-pointer"
-            onClick={() => setPokemonListState(prevState =>  ({...prevState, pokeUrl: pokemonListState.nextList}))}
+            onClick={() =>
+              setPokemonListState((prevState) => ({
+                ...prevState,
+                pokeUrl: pokemonListState.nextList,
+              }))
+            }
           >
             Next
           </button>
         )}
-    </div>
+      </div>
     </div>
   );
 };
