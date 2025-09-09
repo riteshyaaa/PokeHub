@@ -6,8 +6,8 @@ const Pokemon = (props) => {
   return (
     <div>
       <div className="border-2 border-gray-300 rounded-xl p-4 text-lg w-60 shadow-md hover:shadow-lg transition  flex justify-center items-center ">
-        
-        <Link to = {`/pokemon/${id}`}><img src={image} alt={name} className="w-28 h-30  " />
+        <Link to={`/pokemon/${id}`}>
+          <img src={image} alt={name} className="w-28 h-30  " />
         </Link>
       </div>
       <div className="flex  items-center justify-center">

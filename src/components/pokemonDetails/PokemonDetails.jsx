@@ -13,24 +13,18 @@ const PokemonDetails = ({ PokemonName }) => {
     try {
       if (PokemonName) {
         response = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon/${PokemonName}`
+          `https://pokeapi.co/api/v2/pokemon/${PokemonName}`,
         );
       } else {
         response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
       }
-
-      
     } catch (error) {
       console.error("Error fetching Pokémon details:", error);
       setLoading(false);
       return;
-      
     }
-   
 
-    
-
-    console.log(response.data);
+    console.log(response.data); 
     const pokemonDetails = {
       id: response.data.id,
       name: response.data.name,
