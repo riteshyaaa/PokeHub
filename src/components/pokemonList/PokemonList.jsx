@@ -1,54 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Pokemon from "../pokemon/pokemon";
+import usePokemonList from "../../hooks/usePokemonList";
 
 const POKEMON_API_URL = "https://pokeapi.co/api/v2/pokemon";
+
 const PokemonList = () => {
-  // const [pokemonList, setPokemonList] = useState([]);
-  // const [loading, setLoading] = useState(true);
-  // const [pokeUrl, setPokeUrl] = useState(POKEMON_API_URL);
-  // const [prevList, setPrevList] = useState("");
-  // const [nextList, setNextList] = useState("");
-
-  const [pokemonListState , setPokemonListState] =  useState({
-    pokemonList: [],
-    loading: true,
-    pokeUrl: POKEMON_API_URL,
-    prevList: "",
-    nextList: "",
-  })
-
-  const fetchPokemon = async () => {
-    setPokemonListState(prevState => ({...prevState, loading: true}));
-    const response = await axios.get(pokemonListState.pokeUrl);
-    // console.log(response.data);
-    setPokemonListState(prevList => ({...prevList, prevList: response.data.previous, nextList: response.data.next}));
-    
-    // console.log(response.data.results);
-    const pokemonResults = response.data?.results;
-    
-    const pokemonResultsPromise = pokemonResults.map((pokemon) =>
-      axios.get(pokemon.url),
-    );
-    const pokemonData = await Promise.all(pokemonResultsPromise);
-    // console.log(pokemonData);
-
-    const pokemonDataResult = pokemonData.map((poke) => ({
-      id: poke.data.id,
-      name: poke.data.name,
-      image: poke.data.sprites.front_default,
-      types: poke.data.types.map((typeInfo) => typeInfo.type.name).join(", "),
-    }));
-    // console.log(pokemonDataResult);
-    setPokemonListState( prevState => ({...prevState, pokemonList: pokemonDataResult, loading: false}) );
-    
-  };
-
-  useEffect(() => {
-    fetchPokemon();
-    
-    
-  }, [pokemonListState.pokeUrl]);
+const [pokemonListState, setPokemonListState] = usePokemonList(POKEMON_API_URL);
 
   return (
     <div className="max-w-full w-full flex flex-col items-center justify-center mt-10">
