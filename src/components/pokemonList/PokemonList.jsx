@@ -1,36 +1,47 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Pokemon from "../pokemon/Pokemon";
-import usePokemonList from "../../hooks/usePokemonList";
+import React from 'react';
+import { motion } from 'framer-motion';
+import AnimatedCard from '../ui/AnimatedCard';
+import usePokemonList from '../../hooks/usePokemonList';
 
-const POKEMON_API_URL = "https://pokeapi.co/api/v2/pokemon";
+const POKEMON_API_URL = 'https://pokeapi.co/api/v2/pokemon';
 
 const PokemonList = () => {
-  const [pokemonListState, setPokemonListState] =
-    usePokemonList(POKEMON_API_URL);
+  const [pokemonListState, setPokemonListState] = usePokemonList(POKEMON_API_URL);
 
   return (
-    <div className="max-w-full w-full flex flex-col items-center justify-center mt-10">
-      <h1 className="text-2xl font-bold">Pokemon List </h1>
-      <div className="max-w-full w-full flex flex-wrap items-center justify-center mt-10 gap-6">
+    <div className="max-w-full w-full flex flex-col items-center justify-center mt-8">
+      <div className="max-w-full w-full flex flex-wrap items-center justify-center gap-6 px-4">
         {pokemonListState.loading ? (
-          <p className="text-xl font-semibold mt-6">Loading...</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="w-60 h-52 bg-gray-200 rounded-2xl animate-pulse" />
+            ))}
+          </div>
         ) : (
-          pokemonListState.pokemonList.map((poke) => (
-            <Pokemon
+          pokemonListState.pokemonList.map((poke, index) => (
+            <AnimatedCard
               key={poke.id}
               name={poke.name}
               image={poke.image}
               types={poke.types}
               id={poke.id}
+              index={index}
             />
           ))
         )}
       </div>
-      <div className="flex items-center justify-center gap-2 mt-4 mb-4">
+
+      {/* Pagination */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex items-center justify-center gap-3 mt-8 mb-8"
+      >
         {pokemonListState.prevList && (
-          <button
-            className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 shadow-md shadow-blue-700 cursor-pointer"
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl font-medium shadow-lg shadow-blue-500/30 transition"
             onClick={() =>
               setPokemonListState((prevState) => ({
                 ...prevState,
@@ -38,12 +49,14 @@ const PokemonList = () => {
               }))
             }
           >
-            Previous
-          </button>
+            ← Previous
+          </motion.button>
         )}
         {pokemonListState.nextList && (
-          <button
-            className="bg-blue-500 text-white px-2 py-1  rounded hover:bg-blue-600 shadow-md shadow-blue-700 cursor-pointer"
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl font-medium shadow-lg shadow-blue-500/30 transition"
             onClick={() =>
               setPokemonListState((prevState) => ({
                 ...prevState,
@@ -51,11 +64,12 @@ const PokemonList = () => {
               }))
             }
           >
-            Next
-          </button>
+            Next →
+          </motion.button>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 };
+
 export default PokemonList;
