@@ -33,7 +33,10 @@ function usePokemonList(POKEMON_API_URL) {
     const pokemonDataResult = pokemonData.map((poke) => ({
       id: poke.data.id,
       name: poke.data.name,
-      image: poke.data.sprites.front_default,
+      image:
+        poke.data.sprites?.other?.["official-artwork"]?.front_default ||
+        poke.data.sprites?.other?.dream_world?.front_default ||
+        poke.data.sprites.front_default,
       types: poke.data.types.map((typeInfo) => typeInfo.type.name).join(", "),
     }));
     // console.log(pokemonDataResult);

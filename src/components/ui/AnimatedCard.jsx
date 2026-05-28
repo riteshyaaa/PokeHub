@@ -105,14 +105,16 @@ const AnimatedCard = ({ name, image, types, id, index = 0 }) => {
         <Link to={`/pokemon/${id}`}>
           <div className="relative z-[1] border-2 border-gray-200/30 rounded-2xl p-4 bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-shadow">
             {/* Pokemon Image */}
-            <div className="flex justify-center items-center h-32">
+            <div className="flex justify-center items-center h-36">
               <motion.img
                 src={image}
                 alt={name}
-                className="w-28 h-28 object-contain drop-shadow-md"
+                className="w-32 h-32 object-contain drop-shadow-md"
+                style={{ imageRendering: 'auto' }}
                 animate={isHovered ? { y: -5 } : { y: 0 }}
                 transition={{ type: 'spring', stiffness: 200 }}
                 draggable={false}
+                loading="lazy"
               />
             </div>
 
