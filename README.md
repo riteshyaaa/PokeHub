@@ -1,12 +1,81 @@
-# React + Vite
+# PokeHub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern Pokémon companion app built with React + Vite. Browse the Pokédex, explore detailed Pokémon info, build teams, analyze type matchups, and try mini tools like a battle simulator and “Who’s That Pokémon?” quiz.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Pokédex**: Browse and search Pokémon with a smooth, responsive UI.
+- **Pokémon details**: Types, stats, abilities, sprites, evolution chain, and more.
+- **Daily Spotlight**: A daily Pokémon highlight.
+- **Who’s That Pokémon?**: Quick quiz mini-game.
+- **Team Builder**: Create a team and analyze coverage/weaknesses.
+- **Battle Simulator**: Simple damage simulation with type effectiveness + STAB.
+- **Weakness Calculator**: Defensive matchups (weak/resist/immune) by type(s).
+- **Cries Player**: Listen to Pokémon cries (when available).
+- **Size Compare**: Compare Pokémon size/weight.
+- **Completion Tracker**: Track progress locally.
 
-## Expanding the ESLint configuration
+## Tech stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React 19** + **React Router**
+- **Vite** (dev server + build)
+- **Tailwind CSS**
+- **Framer Motion** (animations)
+- **Axios** (API requests)
+- **Chart.js** / **react-chartjs-2** (charts)
+- **html2canvas** (share/export helpers)
+
+## Data source
+
+This project uses **PokéAPI** (`https://pokeapi.co/`) as the primary data source.
+
+## Getting started
+
+### Prerequisites
+
+- **Node.js** (recommended: latest LTS)
+- **npm**
+
+### Install
+
+```bash
+npm install
+```
+
+### Run locally
+
+```bash
+npm run dev
+```
+
+Then open the URL printed in the terminal (usually `http://localhost:5173`).
+
+### Build for production
+
+```bash
+npm run build
+```
+
+### Preview production build
+
+```bash
+npm run preview
+```
+
+### Lint
+
+```bash
+npm run lint
+```
+
+## Project structure (high level)
+
+- `src/components/`: UI + feature pages (Pokédex, battle, team builder, etc.)
+- `src/routes/CustomRoutes.jsx`: App routes + lazy loading
+- `src/utils/`: PokéAPI helpers, constants, type effectiveness logic
+- `src/hooks/`: Reusable hooks (debounce, Pokémon list fetching)
+
+## Notes
+
+- **No environment variables required** (PokéAPI is public).
+- If you ever see a React runtime error about “incompatible React versions”, make sure `react` and `react-dom` are pinned to the **same exact version**.
